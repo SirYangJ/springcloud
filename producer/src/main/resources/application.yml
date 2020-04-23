@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: spring-cloud-producer
+  datasource:
+    username: root
+    password: 12345678
+    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      idle-timeout: 60000
+      maximum-pool-size: 30
+      minimum-idle: 10
+  boot:
+    admin:
+      client:
+        #springboot admin client连接 spring boot admin server 端点地址springboot admin client连接 spring boot admin server 端点地址
+        url: http://localhost:8001
+        instance:
+          #默认使用的是主机名注册，改为使用ip注册
+          prefer-ip: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 9000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com.huhst: debug
